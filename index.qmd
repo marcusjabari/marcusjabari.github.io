@@ -1,5 +1,5 @@
 ---
-title: "YOUR NAME"
+title: "Marcus Lewis"
 about:
   template: trestles  # jolla  trestles  solana  marquee  broadside
   image: img/profile.png
@@ -9,34 +9,33 @@ about:
   links:
     - icon: linkedin
       text: LinkedIn
-      href: https://linkedin.com
+      href: https://www.linkedin.com/in/marcus-lewis-607b98260/
     - icon: instagram
       text: Instagram
-      href: https://instagram.com
+      href: https://www.instagram.com/marcusjabari_/?hl=en
     - icon: github
       text: GitHub
-      href: https://github.com
+      href: https://github.com/marcusjabari/
     - icon: file-earmark-pdf
       text: Resumé
       href: resume-example.pdf
       target: _blank
     - icon: mailbox
       text: Email
-      href: mailto:YOUR_EMAIL@geneseo.edu
+      href: mailto:mjl31@geneseo.edu
 
 ---
 
 
-Finley Malloc majors in Data Analytics at SUNY Geneseo. When not working on data analytics, Finley enjoys spending time unicycling and playing with her pet iguana.
+Hello, I'm Marcus! I major in Data Analytics at SUNY Geneseo. Outside of Data Analytics, I am a Sprinter on the Men's Track and Field team. Additionally, during the semester I work a part-time job at Geneseo's local 7-Eleven!
 
 ## Education
 
 State University of New York at Geneseo | Geneseo, NY <br>
 B.S. in Data Analytics | Aug 2022 - May 2026 <br>
-Minor in Economics
+
 
 ## Experience
 
-Starbucks Analytics | Data Analyst Intern | May 2024 - Aug 2024
-
+Laboratory for Laser Energetics - University of Rochester | Project Assistant| May 2024 - Aug 2024
 
