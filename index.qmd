@@ -2,7 +2,7 @@
 title: "Marcus Lewis"
 about:
   template: trestles  # jolla  trestles  solana  marquee  broadside
-  image: img/profile.png
+  image: img/marcuslinkedin.png
   image-width: 16em
   image-shape: rounded # rectangle  round  rounded
   
