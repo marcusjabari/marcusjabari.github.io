@@ -10,10 +10,12 @@ website:
     left:
       - text: Blog
         href: blog-listing.qmd
-    right:
-       - text: Project
-       href: danl_proj_nba.ipynb
-      
+      - text: "Python Data Analysis"
+        menu:
+          - text: "Pandas Basics"
+            href: pandas_basic.ipynb
+          - text: "Seaborn Basics"
+            href: seaborn_basic.ipynb
   page-footer: 
     center: "Powered with GitHub, Quarto, and Jupyter Notebook<br>© MARCUS LEWIS, 2025"
 
