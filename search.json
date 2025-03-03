@@ -70,44 +70,65 @@
     "text": "Adding a New Column\n\n\n# Adding a new column\ndf[\"Salary\"] = [50000, 60000, 70000]\ndf\n\n\n  \n    \n\n\n\n\n\n\nName\nAge\nCity\nSalary\n\n\n\n\n0\nAlice\n25\nNew York\n50000\n\n\n1\nBob\n30\nLos Angeles\n60000\n\n\n2\nCharlie\n35\nChicago\n70000\n\n\n\n\n\n    \n\n  \n    \n\n  \n    \n  \n    \n\n  \n\n    \n  \n\n\n\n  \n\n\n    \n        \n    \n\n  \n\n\n\n  \n\n\n  \n    \n    \n\n  \n    \n  \n    \n    \n  \n\n    \n  \n\n\n    ## Conclusion\n\n    This notebook covers the basic operations of pandas. You can explore more advanced features like merging,\n    joining, and working with time series data in pandas documentation: https://pandas.pydata.org/docs/"
   },
   {
-    "objectID": "danl-210-python-basic.html",
-    "href": "danl-210-python-basic.html",
-    "title": "Python Basics",
+    "objectID": "seaborn_basics.html",
+    "href": "seaborn_basics.html",
+    "title": "Seaborn Example",
     "section": "",
-    "text": "Python is a high-level, interpreted programming language. This is a simple Python code:\n\nprint('Hello, World!')\n\n\n\n\nIn Python, variables can store data of different types without explicitly declaring the type.\nFor example:\n\ninteger_variable = 10\nstring_variable = 'Hello'\nfloat_variable = 10.5\n\nfloat_variable\n\n10.5\n\n\n\n\n\nPython supports the usual logical conditions from mathematics:\n\n# Equals: a == b\n# Not Equals: a != b\n# Less than: a &lt; b\n# Less than or equal to: a &lt;= b\n# Greater than: a &gt; b\n# Greater than or equal to: a &gt;= b\n\nThese conditions can be used in several ways, most commonly in ‘if statements’ and loops.\n\n# if statement:\nif 5 &gt; 2:\n    print('Five is greater than two!')\n\n\n\n\nA function is a block of code which only runs when it is called.\nYou can pass data, known as parameters, into a function.\nA function can return data as a result.\n\n# Defining a function:\ndef my_function():\n    print('Hello from a function')\n\n# Calling a function:\nmy_function()\n\n\n\n\nA list is a collection which is ordered and changeable.\nA dictionary is a collection which is unordered, changeable and indexed.\n\n# List example:\nmy_list = ['apple', 'banana', 'cherry']\n\n# Dictionary example:\nmy_dict = {'name': 'John', 'age': 36}"
+    "text": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n# Sample data\ndata = {\n    'Category': ['A', 'B', 'C', 'D'],\n    'Values': [23, 45, 56, 78]\n}\ndf = pd.DataFrame(data)\n\n# Create a barplot\nsns.set(style=\"whitegrid\")  # Optional: Set a clean grid style\nplt.figure(figsize=(8, 6))  # Set the figure size\nsns.barplot(data=df, x='Category', y='Values', palette='viridis')\n\n# Customize the plot\nplt.title(\"Bar Plot Example\", fontsize=16)\nplt.xlabel(\"Category\", fontsize=12)\nplt.ylabel(\"Values\", fontsize=12)\n\n# Show the plot\nplt.show()\n\nFutureWarning: \n\nPassing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.\n\n  sns.barplot(data=df, x='Category', y='Values', palette='viridis')"
   },
   {
-    "objectID": "danl-210-python-basic.html#what-is-python",
-    "href": "danl-210-python-basic.html#what-is-python",
-    "title": "Python Basics",
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To My Blog",
     "section": "",
-    "text": "Python is a high-level, interpreted programming language. This is a simple Python code:\n\nprint('Hello, World!')"
+    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
   },
   {
-    "objectID": "danl-210-python-basic.html#variables-and-data-types",
-    "href": "danl-210-python-basic.html#variables-and-data-types",
-    "title": "Python Basics",
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code with no space in the folder name.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "posts/python/danl_210_python_basic.html",
+    "href": "posts/python/danl_210_python_basic.html",
+    "title": "The Basics of Python!",
+    "section": "",
+    "text": "Python is a high-level, interpreted programming language. This is a simple Python code:\n\nprint('Hello, World!')\n\nHello, World!\n\n\n\n\n\nIn Python, variables can store data of different types without explicitly declaring the type.\nFor example:\n\ninteger_variable = 10\nstring_variable = 'Hello'\nfloat_variable = 10.5\n\nfloat_variable\n\n10.5\n\n\n\n\n\nPython supports the usual logical conditions from mathematics:\n\n# Equals: a == b\n# Not Equals: a != b\n# Less than: a &lt; b\n# Less than or equal to: a &lt;= b\n# Greater than: a &gt; b\n# Greater than or equal to: a &gt;= b\n\nThese conditions can be used in several ways, most commonly in ‘if statements’ and loops.\n\n# if statement:\nif 5 &gt; 2:\n    print('Five is greater than two!')\n\nFive is greater than two!\n\n\n\n\n\nA function is a block of code which only runs when it is called.\nYou can pass data, known as parameters, into a function.\nA function can return data as a result.\n\n# Defining a function:\ndef my_function():\n    print('Hello from a function')\n\n# Calling a function:\nmy_function()\n\nHello from a function\n\n\n\n\n\nA list is a collection which is ordered and changeable.\nA dictionary is a collection which is unordered, changeable and indexed.\n\n# List example:\nmy_list = ['apple', 'banana', 'cherry']\n\n# Dictionary example:\nmy_dict = {'name': 'John', 'age': 36}"
+  },
+  {
+    "objectID": "posts/python/danl_210_python_basic.html#what-is-python",
+    "href": "posts/python/danl_210_python_basic.html#what-is-python",
+    "title": "The Basics of Python!",
+    "section": "",
+    "text": "Python is a high-level, interpreted programming language. This is a simple Python code:\n\nprint('Hello, World!')\n\nHello, World!"
+  },
+  {
+    "objectID": "posts/python/danl_210_python_basic.html#variables-and-data-types",
+    "href": "posts/python/danl_210_python_basic.html#variables-and-data-types",
+    "title": "The Basics of Python!",
     "section": "",
     "text": "In Python, variables can store data of different types without explicitly declaring the type.\nFor example:\n\ninteger_variable = 10\nstring_variable = 'Hello'\nfloat_variable = 10.5\n\nfloat_variable\n\n10.5"
   },
   {
-    "objectID": "danl-210-python-basic.html#control-structures",
-    "href": "danl-210-python-basic.html#control-structures",
-    "title": "Python Basics",
+    "objectID": "posts/python/danl_210_python_basic.html#control-structures",
+    "href": "posts/python/danl_210_python_basic.html#control-structures",
+    "title": "The Basics of Python!",
     "section": "",
-    "text": "Python supports the usual logical conditions from mathematics:\n\n# Equals: a == b\n# Not Equals: a != b\n# Less than: a &lt; b\n# Less than or equal to: a &lt;= b\n# Greater than: a &gt; b\n# Greater than or equal to: a &gt;= b\n\nThese conditions can be used in several ways, most commonly in ‘if statements’ and loops.\n\n# if statement:\nif 5 &gt; 2:\n    print('Five is greater than two!')"
+    "text": "Python supports the usual logical conditions from mathematics:\n\n# Equals: a == b\n# Not Equals: a != b\n# Less than: a &lt; b\n# Less than or equal to: a &lt;= b\n# Greater than: a &gt; b\n# Greater than or equal to: a &gt;= b\n\nThese conditions can be used in several ways, most commonly in ‘if statements’ and loops.\n\n# if statement:\nif 5 &gt; 2:\n    print('Five is greater than two!')\n\nFive is greater than two!"
   },
   {
-    "objectID": "danl-210-python-basic.html#functions",
-    "href": "danl-210-python-basic.html#functions",
-    "title": "Python Basics",
+    "objectID": "posts/python/danl_210_python_basic.html#functions",
+    "href": "posts/python/danl_210_python_basic.html#functions",
+    "title": "The Basics of Python!",
     "section": "",
-    "text": "A function is a block of code which only runs when it is called.\nYou can pass data, known as parameters, into a function.\nA function can return data as a result.\n\n# Defining a function:\ndef my_function():\n    print('Hello from a function')\n\n# Calling a function:\nmy_function()"
+    "text": "A function is a block of code which only runs when it is called.\nYou can pass data, known as parameters, into a function.\nA function can return data as a result.\n\n# Defining a function:\ndef my_function():\n    print('Hello from a function')\n\n# Calling a function:\nmy_function()\n\nHello from a function"
   },
   {
-    "objectID": "danl-210-python-basic.html#lists-and-dictionaries",
-    "href": "danl-210-python-basic.html#lists-and-dictionaries",
-    "title": "Python Basics",
+    "objectID": "posts/python/danl_210_python_basic.html#lists-and-dictionaries",
+    "href": "posts/python/danl_210_python_basic.html#lists-and-dictionaries",
+    "title": "The Basics of Python!",
     "section": "",
     "text": "A list is a collection which is ordered and changeable.\nA dictionary is a collection which is unordered, changeable and indexed.\n\n# List example:\nmy_list = ['apple', 'banana', 'cherry']\n\n# Dictionary example:\nmy_dict = {'name': 'John', 'age': 36}"
   },
@@ -131,27 +152,6 @@
     "title": "Starwars",
     "section": "Human vs. Droid",
     "text": "Human vs. Droid\n\nggplot(data = \n         starwars %&gt;% \n         filter(species %in% c(\"Human\", \"Droid\"))) +\n  geom_boxplot(aes(x = species, y = mass, \n                   fill = species),\n               show.legend = FALSE)"
-  },
-  {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
-    "section": "",
-    "text": "This is a post with executable code with no space in the folder name.\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome To My Blog",
-    "section": "",
-    "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
-  },
-  {
-    "objectID": "seaborn_basics.html",
-    "href": "seaborn_basics.html",
-    "title": "Seaborn Example",
-    "section": "",
-    "text": "import seaborn as sns\nimport matplotlib.pyplot as plt\nimport pandas as pd\n\n# Sample data\ndata = {\n    'Category': ['A', 'B', 'C', 'D'],\n    'Values': [23, 45, 56, 78]\n}\ndf = pd.DataFrame(data)\n\n# Create a barplot\nsns.set(style=\"whitegrid\")  # Optional: Set a clean grid style\nplt.figure(figsize=(8, 6))  # Set the figure size\nsns.barplot(data=df, x='Category', y='Values', palette='viridis')\n\n# Customize the plot\nplt.title(\"Bar Plot Example\", fontsize=16)\nplt.xlabel(\"Category\", fontsize=12)\nplt.ylabel(\"Values\", fontsize=12)\n\n# Show the plot\nplt.show()\n\nFutureWarning: \n\nPassing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.\n\n  sns.barplot(data=df, x='Category', y='Values', palette='viridis')"
   },
   {
     "objectID": "index.html",
@@ -179,6 +179,6 @@
     "href": "blog-listing.html",
     "title": "Insightful Analytics",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\n\nJan 22, 2025\n\n\nYOUR NAME\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nStarwars\n\n\n\n\n\n\n\n\nJan 22, 2025\n\n\nYour Name\n\n\n3 min\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\n\n\nJan 22, 2025\n\n\nYOUR NAME\n\n\n1 min\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nThe Basics of Python!\n\n\n\n\n\n\n\n\nFeb 14, 2025\n\n\nMarcus Lewis\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\n\nJan 22, 2025\n\n\nYOUR NAME\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nStarwars\n\n\n\n\n\n\n\n\nJan 22, 2025\n\n\nYour Name\n\n\n3 min\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\n\n\nJan 22, 2025\n\n\nYOUR NAME\n\n\n1 min\n\n\n\n\n\n\nNo matching items"
   }
 ]

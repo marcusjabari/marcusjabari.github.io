@@ -10,6 +10,8 @@ website:
     left:
       - text: Blog
         href: blog-listing.qmd
+      - text: Project
+        href: danl_proj_nba.ipynb
       - text: "Python Data Analysis"
         menu:
           - text: "Pandas Basics"
