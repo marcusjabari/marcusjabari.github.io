@@ -159,7 +159,6 @@ plt.xticks(rotation=45)
 plt.ylabel("Avg. ESG Score")
 plt.show()
 ```
-![](/Users/marcusjabari/Documents/marcusjabari.github.io/img/AVERAGE ESG SCORE BY SECTOR.png){width=80%}
 
 
 
@@ -183,7 +182,7 @@ plt.title("Market Cap by IPO Decade")
 plt.xticks(rotation=45)
 plt.show()
 ```
-![](/Users/marcusjabari/Documents/marcusjabari.github.io/img/MARKET CAP BY IPO DECADE.png){width=80%}
+
 
 
 So far, **Controversy Level** proved to be a valuable ESG proxy. The analysis highlights clear differences in ESG reputational risk across **sectors**, **firm sizes**, and **company age**, offering insight into how businesses are positioned in an increasingly sustainability-focused investment landscape.

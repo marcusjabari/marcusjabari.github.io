@@ -320,7 +320,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Avg. ESG Score"</span>)</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img src="./Users/marcusjabari/Documents/marcusjabari.github.io/img/AVERAGE ESG SCORE BY SECTOR.png" class="img-fluid" style="width:80.0%"></p>
 <p>Then, I loaded the scraped ESG data and used it to explore how market capitalization varies by company age, based on IPO decade.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load 2025 scraped ESG scores</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>esg_scores_2025_DATA <span class="op">=</span> pd.read_csv(<span class="st">'esg_results_2025.csv'</span>)</span>
@@ -334,7 +333,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Market Cap by IPO Decade"</span>)</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Even without full ESG scores for 2025, <strong>Controversy Level</strong> proved to be a valuable ESG proxy. The analysis highlights clear differences in ESG reputational risk across <strong>sectors</strong>, <strong>firm sizes</strong>, and <strong>company age</strong>, offering insight into how businesses are positioned in an increasingly sustainability-focused investment landscape.</p>
+<p>So far, <strong>Controversy Level</strong> proved to be a valuable ESG proxy. The analysis highlights clear differences in ESG reputational risk across <strong>sectors</strong>, <strong>firm sizes</strong>, and <strong>company age</strong>, offering insight into how businesses are positioned in an increasingly sustainability-focused investment landscape.</p>
 <ul>
 <li>Investors can use Controversy Level as a red flag for screening high-risk companies.</li>
 <li>Policymakers may need to focus ESG regulations more heavily on sectors like Energy.</li>
