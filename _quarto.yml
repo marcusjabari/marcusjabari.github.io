@@ -10,8 +10,8 @@ website:
     left:
       - text: Blog
         href: blog-listing.qmd
-      - text: Project
-        href: danl_proj_nba.ipynb
+      - text: ESG Project
+        href: ESG_Project.qmd
       - text: "Python Data Analysis"
         menu:
           - text: "Pandas Basics"

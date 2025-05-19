@@ -3,17 +3,192 @@ title: "ESG Project"
 format: html
 ---
 
-```{r}
-library(readr)
-library(ggplot2)
-esg <- read_csv("../data/esg_data_2025.csv")
 
-ggplot(esg, aes(x = reorder(Symbol, Total_ESG), y = Total_ESG)) +
-  geom_col(fill = "forestgreen") +
-  coord_flip() +
-  labs(
-    title = "Total ESG Scores (2025)",
-    x = "Company",
-    y = "ESG Score"
-  ) +
-  theme_minimal()
+
+
+
+# Background
+
+Environmental, Social, and Governance (ESG) factors are critical to assessing the long-term sustainability and ethical impact of companies. Investors and regulators increasingly rely on ESG metrics to make informed decisions, reduce risk exposure, and ensure accountability. This project explores ESG-related data—specifically **Controversy Level**—as a proxy for stature and compliance risks across companies and sectors.
+
+Aside from scraping current ESG Ratings using Selenium, the main focus was geared toward analyzing **Controversy Levels**, alongside company characteristics such as **Sector**, **Market Capitalization**, and **IPO Year**. This approach still offers meaningful insights into corporate behavior and sustainability risk patterns.
+
+## Scraping ESG Scores with Selenium (Python)
+
+The ESG risk and controversy scores for 2025 were scraped from Yahoo Finance using Python and Selenium. Below is the full script that was used:
+
+# Importations
+```python
+import time
+import random
+import pandas as pd
+import os
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+```
+# Scraping Process for loading and saving my ESG data
+```python
+url_2025 = "https://bcdanl.github.io/data/esg_proj_2025.csv"
+esg_proj_2025 = pd.read_csv(url_2025)
+
+# Optional: Set working directory
+wd_path = '/Users/marcusjabari/Documents/marcusjabari.github.io/'
+os.chdir(wd_path)
+
+# Setup Chrome WebDriver
+options = Options()
+options.add_argument("window-size=1400,1200")
+options.add_argument('--disable-blink-features=AutomationControlled')
+options.page_load_strategy = 'eager'
+driver = webdriver.Chrome(options=options)
+
+# Store results
+esg_scores = []
+controversy_levels = []
+
+for symbol in esg_proj_2025['Symbol']:
+    print(f"Scraping {symbol}...")
+    url = f'https://finance.yahoo.com/quote/{symbol}/sustainability/'
+    driver.get(url)
+    time.sleep(4)
+
+    try:
+        esg_score = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, '/html/body/div[2]/main/section/section/section/article/section[2]/section[1]/div/section[1]'))
+        ).text
+    except:
+        esg_score = None
+
+    try:
+        controversy = WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.XPATH, '/html/body/div[2]/main/section/section/section/article/section[3]/section[1]/div/div[2]'))
+        ).text
+    except:
+        controversy = None
+
+    esg_scores.append(esg_score)
+    controversy_levels.append(controversy)
+
+    print(f"{symbol}: ESG = {esg_score}, Controversy = {controversy}")
+    time.sleep(2 + random.random())
+
+driver.quit()
+
+# Save the data
+esg_proj_2025['esg_score'] = esg_scores
+esg_proj_2025['controversy_level'] = controversy_levels
+esg_proj_2025.to_csv("esg_results_202_
+```
+
+## Historical Stock Price Collection (2024–2025)
+
+To evaluate potential links between ESG performance and market behavior, I retrieved **daily stock prices** from **January 1, 2024 to March 31, 2025** for all companies that appeared in **both the 2024 and 2025 ESG datasets**. I used the Python library `yfinance`, which is a wrapper for Yahoo Finance’s historical market data. This approach allows a consistent and reproducible pull of open, close, volume, and adjusted prices for every ticker in the analysis.
+
+The data was saved to individual `.csv` files for future use in time series visualization and trend analysis alongside ESG metrics.
+
+```python
+
+# Install the yfinance package
+!pip install yfinance
+
+# Load ESG project data
+import pandas as pd
+url_2024 = "https://bcdanl.github.io/data/esg_proj_2024_data.csv"
+esg_proj_2024_data = pd.read_csv(url_2024)
+
+url_2025 = "https://bcdanl.github.io/data/esg_proj_2025.csv"
+esg_proj_2025 = pd.read_csv(url_2025)
+
+# Import yfinance for pulling stock data
+import yfinance as yf
+
+# Get tickers that exist in both ESG datasets
+tickers = set(esg_proj_2024_data['Symbol']).intersection(set(esg_proj_2025['Symbol']))
+
+# Download historical prices from Yahoo Finance
+all_prices = {}
+
+for Symbol in tickers:
+    print(f"Downloading: {Symbol}")
+    df = yf.download(Symbol, start="2024-01-01", end="2025-03-31")
+    all_prices[Symbol] = df
+
+    # Save each stock’s data as a separate CSV
+    df.to_csv(f"{Symbol}_stock_data.csv")
+
+# Example output: first few rows of MSFT data
+all_prices['MSFT'].head()
+```
+## ESG Data Analysis and Sector Risk Assessment
+
+In this section, I combined ESG score data from 2024 and my scraped 2025 ESG results to analyze trends in ESG performance and controversy exposure. I first loaded the 2024 and 2025 datasets, uploaded my custom-scraped ESG scores from Yahoo Finance using Selenium, and visualized patterns by sector and company age. These visualizations provide insight into how ESG risks relate to firm attributes such as industry, size, and IPO decade.
+
+```python
+import pandas as pd
+
+# Load ESG project data
+url_2024 = "https://bcdanl.github.io/data/esg_proj_2024_data.csv"
+esg_proj_2024_data = pd.read_csv(url_2024)
+
+url_2025 = "https://bcdanl.github.io/data/esg_proj_2025.csv"
+esg_proj_2025 = pd.read_csv(url_2025)
+
+# View available columns in 2025 data
+esg_proj_2025.columns
+
+# Upload my scraped 2025 ESG results from Selenium
+from google.colab import files
+uploaded = files.upload()
+```
+
+Next, I visualized the average ESG scores by sector using the 2024 data. This helps identify which industries are leading or lagging in ESG performance.
+
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+sector_avg = esg_proj_2024_data.groupby('Sector')['Total_ESG'].mean().reset_index().sort_values('Total_ESG')
+
+plt.figure(figsize=(10, 5))
+sns.barplot(data=sector_avg, x='Sector', y='Total_ESG', palette='Purples_r')
+plt.title("Average ESG Score by Sector (2024)")
+plt.xticks(rotation=45)
+plt.ylabel("Avg. ESG Score")
+plt.show()
+```
+![](/Users/marcusjabari/Documents/marcusjabari.github.io/img/AVERAGE ESG SCORE BY SECTOR.png){width=80%}
+
+
+
+Then, I loaded the scraped ESG data and used it to explore how market capitalization varies by company age, based on IPO decade.
+
+```python
+# Load 2025 scraped ESG scores
+esg_scores_2025_DATA = pd.read_csv('esg_results_2025.csv')
+esg_scores_2025_DATA.columns
+esg_scores_2025_DATA
+```
+
+I created a new column for IPO decade and plotted market cap to identify patterns across time.
+
+```python
+# Create IPO Decade column and plot Market Cap by decade
+esg_proj_2025['IPO_Decade'] = (esg_scores_2025_DATA['IPO_Year'] // 10) * 10
+
+sns.boxplot(data=esg_proj_2025, x='IPO_Decade', y='Market_Cap')
+plt.title("Market Cap by IPO Decade")
+plt.xticks(rotation=45)
+plt.show()
+```
+![](/Users/marcusjabari/Documents/marcusjabari.github.io/img/MARKET CAP BY IPO DECADE.png){width=80%}
+
+
+So far, **Controversy Level** proved to be a valuable ESG proxy. The analysis highlights clear differences in ESG reputational risk across **sectors**, **firm sizes**, and **company age**, offering insight into how businesses are positioned in an increasingly sustainability-focused investment landscape.
+
+- Investors can use Controversy Level as a red flag for screening high-risk companies.
+- Policymakers may need to focus ESG regulations more heavily on sectors like Energy.
+- Smaller firms may benefit from ESG training or partnerships to reduce controversy exposure.
+

@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -94,8 +128,8 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./danl_proj_nba.html"> 
-<span class="menu-text">Project</span></a>
+    <a class="nav-link active" href="./ESG_Project.html" aria-current="page"> 
+<span class="menu-text">ESG Project</span></a>
   </li>  
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-python-data-analysis" role="link" data-bs-toggle="dropdown" aria-expanded="false">
@@ -147,10 +181,169 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>library(readr) library(ggplot2) esg &lt;- read_csv(“../data/esg_data_2025.csv”)</p>
-<p>ggplot(esg, aes(x = reorder(Symbol, Total_ESG), y = Total_ESG)) + geom_col(fill = “forestgreen”) + coord_flip() + labs( title = “Total ESG Scores (2025)”, x = “Company”, y = “ESG Score” ) + theme_minimal()</p>
+<section id="background" class="level1">
+<h1>Background</h1>
+<p>Environmental, Social, and Governance (ESG) factors are critical to assessing the long-term sustainability and ethical impact of companies. Investors and regulators increasingly rely on ESG metrics to make informed decisions, reduce risk exposure, and ensure accountability. This project explores ESG-related data—specifically <strong>Controversy Level</strong>—as a proxy for stature and compliance risks across companies and sectors.</p>
+<p>Aside from scraping current ESG Ratings using Selenium, the main focus was geared toward analyzing <strong>Controversy Levels</strong>, alongside company characteristics such as <strong>Sector</strong>, <strong>Market Capitalization</strong>, and <strong>IPO Year</strong>. This approach still offers meaningful insights into corporate behavior and sustainability risk patterns.</p>
+<section id="scraping-esg-scores-with-selenium-python" class="level2">
+<h2 class="anchored" data-anchor-id="scraping-esg-scores-with-selenium-python">Scraping ESG Scores with Selenium (Python)</h2>
+<p>The ESG risk and controversy scores for 2025 were scraped from Yahoo Finance using Python and Selenium. Below is the full script that was used:</p>
+</section>
+</section>
+<section id="importations" class="level1">
+<h1>Importations</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> random</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> selenium <span class="im">import</span> webdriver</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> selenium.webdriver.common.by <span class="im">import</span> By</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> selenium.webdriver.chrome.options <span class="im">import</span> Options</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> selenium.webdriver.support.ui <span class="im">import</span> WebDriverWait</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> selenium.webdriver.support <span class="im">import</span> expected_conditions <span class="im">as</span> EC</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="scraping-process-for-loading-and-saving-my-esg-data" class="level1">
+<h1>Scraping Process for loading and saving my ESG data</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>url_2025 <span class="op">=</span> <span class="st">"https://bcdanl.github.io/data/esg_proj_2025.csv"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>esg_proj_2025 <span class="op">=</span> pd.read_csv(url_2025)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Optional: Set working directory</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>wd_path <span class="op">=</span> <span class="st">'/Users/marcusjabari/Documents/marcusjabari.github.io/'</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>os.chdir(wd_path)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Setup Chrome WebDriver</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>options <span class="op">=</span> Options()</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>options.add_argument(<span class="st">"window-size=1400,1200"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>options.add_argument(<span class="st">'--disable-blink-features=AutomationControlled'</span>)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>options.page_load_strategy <span class="op">=</span> <span class="st">'eager'</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>driver <span class="op">=</span> webdriver.Chrome(options<span class="op">=</span>options)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Store results</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>esg_scores <span class="op">=</span> []</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>controversy_levels <span class="op">=</span> []</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> symbol <span class="kw">in</span> esg_proj_2025[<span class="st">'Symbol'</span>]:</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Scraping </span><span class="sc">{</span>symbol<span class="sc">}</span><span class="ss">..."</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    url <span class="op">=</span> <span class="ss">f'https://finance.yahoo.com/quote/</span><span class="sc">{</span>symbol<span class="sc">}</span><span class="ss">/sustainability/'</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    driver.get(url)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="dv">4</span>)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        esg_score <span class="op">=</span> WebDriverWait(driver, <span class="dv">10</span>).until(</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>            EC.presence_of_element_located((By.XPATH, <span class="st">'/html/body/div[2]/main/section/section/section/article/section[2]/section[1]/div/section[1]'</span>))</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>        ).text</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span>:</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>        esg_score <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">try</span>:</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>        controversy <span class="op">=</span> WebDriverWait(driver, <span class="dv">10</span>).until(</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>            EC.presence_of_element_located((By.XPATH, <span class="st">'/html/body/div[2]/main/section/section/section/article/section[3]/section[1]/div/div[2]'</span>))</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        ).text</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">except</span>:</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>        controversy <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    esg_scores.append(esg_score)</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    controversy_levels.append(controversy)</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>symbol<span class="sc">}</span><span class="ss">: ESG = </span><span class="sc">{</span>esg_score<span class="sc">}</span><span class="ss">, Controversy = </span><span class="sc">{</span>controversy<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    time.sleep(<span class="dv">2</span> <span class="op">+</span> random.random())</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>driver.quit()</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the data</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>esg_proj_2025[<span class="st">'esg_score'</span>] <span class="op">=</span> esg_scores</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>esg_proj_2025[<span class="st">'controversy_level'</span>] <span class="op">=</span> controversy_levels</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>esg_proj_2025.to_csv(<span class="st">"esg_results_202_</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="historical-stock-price-collection-20242025" class="level2">
+<h2 class="anchored" data-anchor-id="historical-stock-price-collection-20242025">Historical Stock Price Collection (2024–2025)</h2>
+<p>To evaluate potential links between ESG performance and market behavior, I retrieved <strong>daily stock prices</strong> from <strong>January 1, 2024 to March 31, 2025</strong> for all companies that appeared in <strong>both the 2024 and 2025 ESG datasets</strong>. I used the Python library <code>yfinance</code>, which is a wrapper for Yahoo Finance’s historical market data. This approach allows a consistent and reproducible pull of open, close, volume, and adjusted prices for every ticker in the analysis.</p>
+<p>The data was saved to individual <code>.csv</code> files for future use in time series visualization and trend analysis alongside ESG metrics.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Install the yfinance package</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install yfinance</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load ESG project data</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>url_2024 <span class="op">=</span> <span class="st">"https://bcdanl.github.io/data/esg_proj_2024_data.csv"</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>esg_proj_2024_data <span class="op">=</span> pd.read_csv(url_2024)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>url_2025 <span class="op">=</span> <span class="st">"https://bcdanl.github.io/data/esg_proj_2025.csv"</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>esg_proj_2025 <span class="op">=</span> pd.read_csv(url_2025)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Import yfinance for pulling stock data</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> yfinance <span class="im">as</span> yf</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Get tickers that exist in both ESG datasets</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>tickers <span class="op">=</span> <span class="bu">set</span>(esg_proj_2024_data[<span class="st">'Symbol'</span>]).intersection(<span class="bu">set</span>(esg_proj_2025[<span class="st">'Symbol'</span>]))</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Download historical prices from Yahoo Finance</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>all_prices <span class="op">=</span> {}</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> Symbol <span class="kw">in</span> tickers:</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Downloading: </span><span class="sc">{</span>Symbol<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    df <span class="op">=</span> yf.download(Symbol, start<span class="op">=</span><span class="st">"2024-01-01"</span>, end<span class="op">=</span><span class="st">"2025-03-31"</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    all_prices[Symbol] <span class="op">=</span> df</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Save each stock’s data as a separate CSV</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    df.to_csv(<span class="ss">f"</span><span class="sc">{</span>Symbol<span class="sc">}</span><span class="ss">_stock_data.csv"</span>)</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Example output: first few rows of MSFT data</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>all_prices[<span class="st">'MSFT'</span>].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="esg-data-analysis-and-sector-risk-assessment" class="level2">
+<h2 class="anchored" data-anchor-id="esg-data-analysis-and-sector-risk-assessment">ESG Data Analysis and Sector Risk Assessment</h2>
+<p>In this section, I combined ESG score data from 2024 and my scraped 2025 ESG results to analyze trends in ESG performance and controversy exposure. I first loaded the 2024 and 2025 datasets, uploaded my custom-scraped ESG scores from Yahoo Finance using Selenium, and visualized patterns by sector and company age. These visualizations provide insight into how ESG risks relate to firm attributes such as industry, size, and IPO decade.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Load ESG project data</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>url_2024 <span class="op">=</span> <span class="st">"https://bcdanl.github.io/data/esg_proj_2024_data.csv"</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>esg_proj_2024_data <span class="op">=</span> pd.read_csv(url_2024)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>url_2025 <span class="op">=</span> <span class="st">"https://bcdanl.github.io/data/esg_proj_2025.csv"</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>esg_proj_2025 <span class="op">=</span> pd.read_csv(url_2025)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># View available columns in 2025 data</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>esg_proj_2025.columns</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Upload my scraped 2025 ESG results from Selenium</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> google.colab <span class="im">import</span> files</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>uploaded <span class="op">=</span> files.upload()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Next, I visualized the average ESG scores by sector using the 2024 data. This helps identify which industries are leading or lagging in ESG performance.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>sector_avg <span class="op">=</span> esg_proj_2024_data.groupby(<span class="st">'Sector'</span>)[<span class="st">'Total_ESG'</span>].mean().reset_index().sort_values(<span class="st">'Total_ESG'</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>sns.barplot(data<span class="op">=</span>sector_avg, x<span class="op">=</span><span class="st">'Sector'</span>, y<span class="op">=</span><span class="st">'Total_ESG'</span>, palette<span class="op">=</span><span class="st">'Purples_r'</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Average ESG Score by Sector (2024)"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Avg. ESG Score"</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="./Users/marcusjabari/Documents/marcusjabari.github.io/img/AVERAGE ESG SCORE BY SECTOR.png" class="img-fluid" style="width:80.0%"></p>
+<p>Then, I loaded the scraped ESG data and used it to explore how market capitalization varies by company age, based on IPO decade.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load 2025 scraped ESG scores</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>esg_scores_2025_DATA <span class="op">=</span> pd.read_csv(<span class="st">'esg_results_2025.csv'</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>esg_scores_2025_DATA.columns</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>esg_scores_2025_DATA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>I created a new column for IPO decade and plotted market cap to identify patterns across time.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create IPO Decade column and plot Market Cap by decade</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>esg_proj_2025[<span class="st">'IPO_Decade'</span>] <span class="op">=</span> (esg_scores_2025_DATA[<span class="st">'IPO_Year'</span>] <span class="op">//</span> <span class="dv">10</span>) <span class="op">*</span> <span class="dv">10</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data<span class="op">=</span>esg_proj_2025, x<span class="op">=</span><span class="st">'IPO_Decade'</span>, y<span class="op">=</span><span class="st">'Market_Cap'</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Market Cap by IPO Decade"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>plt.xticks(rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Even without full ESG scores for 2025, <strong>Controversy Level</strong> proved to be a valuable ESG proxy. The analysis highlights clear differences in ESG reputational risk across <strong>sectors</strong>, <strong>firm sizes</strong>, and <strong>company age</strong>, offering insight into how businesses are positioned in an increasingly sustainability-focused investment landscape.</p>
+<ul>
+<li>Investors can use Controversy Level as a red flag for screening high-risk companies.</li>
+<li>Policymakers may need to focus ESG regulations more heavily on sectors like Energy.</li>
+<li>Smaller firms may benefit from ESG training or partnerships to reduce controversy exposure.</li>
+</ul>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script type="text/javascript" src="links.js"></script>
