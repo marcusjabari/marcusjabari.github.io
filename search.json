@@ -215,5 +215,40 @@
     "title": "Insightful Analytics",
     "section": "",
     "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nThe Basics of Python!\n\n\n\n\n\n\n\n\nFeb 14, 2025\n\n\nMarcus Lewis\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nSpotify Data\n\n\n\n\n\n\n\n\nFeb 14, 2025\n\n\nMarcus Lewis\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\n\nJan 22, 2025\n\n\nYOUR NAME\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nStarwars\n\n\n\n\n\n\n\n\nJan 22, 2025\n\n\nYour Name\n\n\n3 min\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\n\n\nJan 22, 2025\n\n\nYOUR NAME\n\n\n1 min\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "ESG_Project.html#conclusion",
+    "href": "ESG_Project.html#conclusion",
+    "title": "ESG Project",
+    "section": "Conclusion",
+    "text": "Conclusion\nThis ESG project explored company-level sustainability risk through the lens of Controversy Levels and ESG scores across 2024 and 2025. While full ESG metrics were not always available, the controversy data and market indicators (sector, IPO year, market cap) provided meaningful insight into reputational and structural ESG risk.\nKey findings include: - Sectors like Energy and Consumer Discretionary had higher ESG risk exposure. - Larger and older firms tended to have higher market capitalization but weren’t always controversy-free. - Newer firms (IPO after 2010) showed less controversy, potentially indicating more modern governance standards.\nThese findings could be useful for: - Investors, who may want to screen for ESG risk beyond traditional financial indicators. - Policymakers, aiming to target specific sectors for regulatory reform. - Companies, especially small-cap and newly public ones, to build ESG maturity early."
+  },
+  {
+    "objectID": "ESG_Project.html#limitations-and-future-work",
+    "href": "ESG_Project.html#limitations-and-future-work",
+    "title": "ESG Project",
+    "section": "Limitations and Future Work",
+    "text": "Limitations and Future Work\n\nThis project focused on ESG controversy as a proxy due to limited score availability for 2025.\nFuture work could incorporate updated ESG risk scores across more years, and apply time-series analysis to stock performance vs ESG trend."
+  },
+  {
+    "objectID": "ESG_Project.html#tools-and-workflow",
+    "href": "ESG_Project.html#tools-and-workflow",
+    "title": "ESG Project",
+    "section": "Tools and Workflow",
+    "text": "Tools and Workflow\n\nPython (Selenium, yfinance, pandas) for scraping and data collection\nR (tidyverse, ggplot2) for visualization and analysis\nQuarto and GitHub for reporting and publishing\n\nThis project demonstrates an end-to-end pipeline of data scraping → transformation → visualization → publishing, all in a reproducible format."
+  },
+  {
+    "objectID": "ESG_Project.html#ai-and-collaboration-statement",
+    "href": "ESG_Project.html#ai-and-collaboration-statement",
+    "title": "ESG Project",
+    "section": "AI and Collaboration Statement",
+    "text": "AI and Collaboration Statement\nParts of this analysis, including code organization, debugging, and documentation structure, were guided by OpenAI’s ChatGPT. All code, interpretations, and visualizations were reviewed and finalized by the author."
+  },
+  {
+    "objectID": "ESG_Project.html#references",
+    "href": "ESG_Project.html#references",
+    "title": "ESG Project",
+    "section": "References",
+    "text": "References\n\nYahoo Finance: https://finance.yahoo.com\nESG Data: https://bcdanl.github.io/data/\nyfinance GitHub: https://github.com/ranaroussi/yfinance\nQuarto Documentation: https://quarto.org"
   }
 ]
