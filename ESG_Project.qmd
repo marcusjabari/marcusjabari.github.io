@@ -1,0 +1,19 @@
+---
+title: "ESG Project"
+format: html
+---
+
+```{r}
+library(readr)
+library(ggplot2)
+esg <- read_csv("../data/esg_data_2025.csv")
+
+ggplot(esg, aes(x = reorder(Symbol, Total_ESG), y = Total_ESG)) +
+  geom_col(fill = "forestgreen") +
+  coord_flip() +
+  labs(
+    title = "Total ESG Scores (2025)",
+    x = "Company",
+    y = "ESG Score"
+  ) +
+  theme_minimal()

@@ -84,13 +84,6 @@
     "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
   },
   {
-    "objectID": "posts/post-with-code/index.html",
-    "href": "posts/post-with-code/index.html",
-    "title": "Post With Code",
-    "section": "",
-    "text": "This is a post with executable code with no space in the folder name.\n\n1 + 1\n\n[1] 2"
-  },
-  {
     "objectID": "posts/python/danl_210_python_basic.html",
     "href": "posts/python/danl_210_python_basic.html",
     "title": "The Basics of Python!",
@@ -131,6 +124,27 @@
     "title": "The Basics of Python!",
     "section": "",
     "text": "A list is a collection which is ordered and changeable.\nA dictionary is a collection which is unordered, changeable and indexed.\n\n# List example:\nmy_list = ['apple', 'banana', 'cherry']\n\n# Dictionary example:\nmy_dict = {'name': 'John', 'age': 36}"
+  },
+  {
+    "objectID": "ESG_Project.html",
+    "href": "ESG_Project.html",
+    "title": "ESG Project",
+    "section": "",
+    "text": "library(readr) library(ggplot2) esg &lt;- read_csv(“../data/esg_data_2025.csv”)\nggplot(esg, aes(x = reorder(Symbol, Total_ESG), y = Total_ESG)) + geom_col(fill = “forestgreen”) + coord_flip() + labs( title = “Total ESG Scores (2025)”, x = “Company”, y = “ESG Score” ) + theme_minimal()"
+  },
+  {
+    "objectID": "posts/post-with-code/index.html",
+    "href": "posts/post-with-code/index.html",
+    "title": "Post With Code",
+    "section": "",
+    "text": "This is a post with executable code with no space in the folder name.\n\n1 + 1\n\n[1] 2"
+  },
+  {
+    "objectID": "posts/spotify/Spotify.html",
+    "href": "posts/spotify/Spotify.html",
+    "title": "Spotify Data",
+    "section": "",
+    "text": "import pandas as pd\nspotify = pd.read_csv('https://bcdanl.github.io/data/spotify_all.csv')\nspotify\n\n\n  \n    \n\n\n\n\n\n\npid\nplaylist_name\npos\nartist_name\ntrack_name\nduration_ms\nalbum_name\n\n\n\n\n0\n0\nThrowbacks\n0\nMissy Elliott\nLose Control (feat. Ciara & Fat Man Scoop)\n226863\nThe Cookbook\n\n\n1\n0\nThrowbacks\n1\nBritney Spears\nToxic\n198800\nIn The Zone\n\n\n2\n0\nThrowbacks\n2\nBeyoncé\nCrazy In Love\n235933\nDangerously In Love (Alben für die Ewigkeit)\n\n\n3\n0\nThrowbacks\n3\nJustin Timberlake\nRock Your Body\n267266\nJustified\n\n\n4\n0\nThrowbacks\n4\nShaggy\nIt Wasn't Me\n227600\nHot Shot\n\n\n...\n...\n...\n...\n...\n...\n...\n...\n\n\n198000\n999998\n✝️\n6\nChris Tomlin\nWaterfall\n209573\nLove Ran Red\n\n\n198001\n999998\n✝️\n7\nChris Tomlin\nThe Roar\n220106\nLove Ran Red\n\n\n198002\n999998\n✝️\n8\nCrowder\nLift Your Head Weary Sinner (Chains)\n224666\nNeon Steeple\n\n\n198003\n999998\n✝️\n9\nChris Tomlin\nWe Fall Down\n280960\nHow Great Is Our God: The Essential Collection\n\n\n198004\n999998\n✝️\n10\nCaleb and Kelsey\n10,000 Reasons / What a Beautiful Name\n178189\n10,000 Reasons / What a Beautiful Name\n\n\n\n\n198005 rows × 7 columns\n\n    \n\n  \n    \n\n  \n    \n  \n    \n\n  \n\n    \n  \n\n\n\n  \n\n\n    \n        \n    \n\n  \n\n\n\n  \n\n\n  \n    \n    \n\n  \n    \n  \n    \n    \n  \n\n    \n  \n\n\n\nbey = spotify['artist_name'] == 'Beyoncé'\nbeyonce_songs= spotify.track_name[bey] #Beyoncé songs only!\n\n\n\n\n\n\n\n\n\ntrack_name\n\n\n\n\n2\nCrazy In Love\n\n\n18\nCheck On It - feat. Bun B and Slim Thug\n\n\n342\nSingle Ladies (Put a Ring on It)\n\n\n1059\nHalo\n\n\n1079\nDrunk in Love\n\n\n...\n...\n\n\n197084\n7/11\n\n\n197107\nDance for You\n\n\n197127\nRocket\n\n\n197521\nSingle Ladies (Put a Ring on It)\n\n\n197720\nIrreplaceable (Irreemplazable) - Spanish version\n\n\n\n\n591 rows × 1 columns\ndtype: object\n\n\n\n'Dangerously In Love (Alben für die Ewigkeit)'\nbey_album = spotify.album_name == 'Dangerously In Love (Alben für die Ewigkeit)'\n\n\n(\n  spotify[bey_album][['track_name']]\n  .value_counts()\n)\n#Crazy in Love is my favorite song from this album, it was also the most popular track\n\n\n\n\n\n\n\n\ncount\n\n\ntrack_name\n\n\n\n\n\nCrazy In Love\n59\n\n\nNaughty Girl\n6\n\n\nDangerously In Love\n4\n\n\nMe, Myself and I\n3\n\n\nThe Closer I Get to You\n3\n\n\nSpeechless\n1\n\n\n\n\ndtype: int64"
   },
   {
     "objectID": "posts/starwars/starwars_df.html",
@@ -179,6 +193,6 @@
     "href": "blog-listing.html",
     "title": "Insightful Analytics",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nThe Basics of Python!\n\n\n\n\n\n\n\n\nFeb 14, 2025\n\n\nMarcus Lewis\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\n\nJan 22, 2025\n\n\nYOUR NAME\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nStarwars\n\n\n\n\n\n\n\n\nJan 22, 2025\n\n\nYour Name\n\n\n3 min\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\n\n\nJan 22, 2025\n\n\nYOUR NAME\n\n\n1 min\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nThe Basics of Python!\n\n\n\n\n\n\n\n\nFeb 14, 2025\n\n\nMarcus Lewis\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nSpotify Data\n\n\n\n\n\n\n\n\nFeb 14, 2025\n\n\nMarcus Lewis\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\n\nJan 22, 2025\n\n\nYOUR NAME\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nStarwars\n\n\n\n\n\n\n\n\nJan 22, 2025\n\n\nYour Name\n\n\n3 min\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\n\n\nJan 22, 2025\n\n\nYOUR NAME\n\n\n1 min\n\n\n\n\n\n\nNo matching items"
   }
 ]
