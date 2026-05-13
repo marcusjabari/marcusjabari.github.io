@@ -1,0 +1,123 @@
+---
+title: "Pixels to Profits"
+subtitle: "The Evolution of the Global Gaming Industry"
+author: "Marcus Lewis"
+date: "May 4, 2026"
+format: 
+  revealjs:
+    theme: sky
+    transition: slide
+    scrollable: true
+    code-fold: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## The Hook: Why Video Games?
+
+- **The Question:** How did a niche hobby in the 1980s become a \$200B+ global industry?
+- **The Data:** 16,500+ records of sales from 1980 to 2020.
+- **The Goal:** Today we will uncover:
+  1.  Which genres drove global growth.
+  2.  How regional tastes (US vs. Japan) differ.
+  3.  The era of the "Mega-Hit."
+
+## Our Data Source
+
+- **Dataset:** Kaggle Video Game Sales (vgsales.csv).
+- **Variables:** Rank, Name, Platform, Year, Genre, Publisher, and Regional Sales (NA, EU, JP, Other).
+- **Suitability:** It contains enough categorical data (Genre/Platform) and numerical data (Sales) to track trends over 40 years.
+
+## Data Transformation
+
+To tell a clean story, we had to clean and reshape the raw data.
+
+\`\`\`{r} library(tidyverse)
+
+# Load data
+
+```{r}
+library(tidyverse)
+
+vgsales <- read_csv("/Users/marcusjabari/Downloads/vgsales.csv") %>% 
+  filter(!is.na(Year), Year <= 2016) # Filtering incomplete recent years
+```
+
+# Create a Long Format for Regional Analysis
+
+```{r}
+vgsales_long <- vgsales %>% pivot_longer(cols = c(NA_Sales, EU_Sales, JP_Sales), names_to = "Region", values_to = "Sales") %>% mutate(Region = str_remove(Region, "_Sales"))
+```
+
+
+
+YAML
+
+```         
+---
+title: "Pixels to Profits"
+subtitle: "The Evolution of the Global Gaming Industry"
+author: "Your Name"
+date: "May 4, 2026"
+format: 
+  revealjs:
+    theme: sky
+    transition: slide
+    scrollable: true
+    code-fold: true
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+## The Hook: Why Video Games?
+* **The Question:** How did a niche hobby in the 1980s become a $200B+ global industry?
+* **The Data:** 16,500+ records of sales from 1980 to 2020.
+* **The Goal:** Today we will uncover:
+    1.  Which genres drove global growth.
+    2.  How regional tastes (US vs. Japan) differ.
+    3.  The era of the "Mega-Hit."
+
+## Our Data Source
+* **Dataset:** Kaggle Video Game Sales (vgsales.csv).
+* **Variables:** Rank, Name, Platform, Year, Genre, Publisher, and Regional Sales (NA, EU, JP, Other).
+* **Suitability:** It contains enough categorical data (Genre/Platform) and numerical data (Sales) to track trends over 40 years.
+
+## Data Transformation
+To tell a clean story, we had to clean and reshape the raw data.
+
+```{r}
+library(tidyverse)
+
+# Load data
+vgsales <- read_csv("vgsales.csv") %>%
+  filter(!is.na(Year), Year <= 2016) # Filtering incomplete recent years
+
+# Create a Long Format for Regional Analysis
+vgsales_long <- vgsales %>%
+  pivot_longer(cols = c(NA_Sales, EU_Sales, JP_Sales),
+               names_to = "Region",
+               values_to = "Sales") %>%
+  mutate(Region = str_remove(Region, "_Sales"))
+```
+
+## The "Golden Age" of Growth
+
+The mid-2000s saw an explosion in sales. Why?
+
+```{r}
+#| output-location: fragment
+# Summarizing sales by year
+annual_sales <- vgsales %>%
+  group_by(Year) %>%
+  summarize(Total_Global = sum(Global_Sales))
+
+ggplot(annual_sales, aes(x = Year, y = Total_Global)) +
+  geom_line(color = "firebrick", size = 1.2) +
+  geom_area(fill = "firebrick", alpha = 0.3) +
+  theme_minimal() +
+  labs(title = "Total Video Game Sales (1980-2016)", y = "Millions of Units")
+```
