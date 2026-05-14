@@ -32,3 +32,10 @@ format:
     toc: false
     include-after-body: target_blank.html
 
+website:
+  navbar:
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Gaming Analysis"  # This is the label people will click
+        href: vgsales_project.qmd         # This must match your filename exactly
