@@ -27,7 +27,7 @@ about:
 ---
 
 
-Hello, I'm Marcus! I major in Data Analytics at SUNY Geneseo. Outside of Data Analytics, I am a Sprinter on the Men's Track and Field team. Additionally, during the semester I work a part-time job at Geneseo's local 7-Eleven!
+Hello, I'm Marcus! I major in Data Analytics at SUNY Geneseo. Outside of Data Analytics, I enjoy participating in MMA and I am currently learning how to fish!.
 
 ## Education
 
@@ -37,5 +37,6 @@ B.S. in Data Analytics | Aug 2022 - May 2026 <br>
 
 ## Experience
 
-Laboratory for Laser Energetics - University of Rochester | Project Assistant| May 2024 - Aug 2024
-
+- Laboratory for Laser Energetics - University of Rochester | Project Assistant| May 2024 - Aug 2024
+- SUNY Geneseo - Sports Data and Social Media Intern | September 2023- 2026
+- WebSeal - Rochester, NY | Production Associate | 
